@@ -1,7 +1,72 @@
+$background-color: rgb(37, 37, 35);
+$font-color: rgb(251, 255, 236);
+$input-color: rgb(43, 43, 40);
+$link-color: rgb(255, 220, 174);
+$button-color: rgb(68, 68, 63);
+$button-active-color: rgb(58, 58, 53);
+$border-dark: 2px solid rgb(33, 33, 33);
+$border-light: 2px solid rgb(90, 90, 90);
+$border-focus-light: 2px solid rgb(130, 130, 130);
+$border-focus-dark: 2px solid rgb(30, 30, 30);
+
+html, body {
+  height: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;
-  background-color: rgb(37, 37, 35);
-  color: rgb(251, 255, 236);
+  background-color: $background-color;
+  color: $font-color;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+}
+
+input {
+  height: 50px;
+  padding-left: 10px;
+  width: 400px;
+  background-color: $input-color;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: $font-color;
+  border-top: $border-dark;
+  border-left: $border-dark;
+  border-bottom: $border-light;
+  border-right: $border-light;
+}
+
+input:focus {
+  outline: none;
+  border-top: $border-focus-dark;
+  border-left: $border-focus-dark;
+  border-bottom: $border-focus-light;
+  border-right: $border-focus-light;
+}
+
+a {
+  color: $link-color;
+}
+
+button {
+  background-color: $button-color;
+  color: $font-color;
+  font-size: 20px;
+  height: 50px;
+  padding: 0 20px;
+  border-bottom: $border-dark;
+  border-right: $border-dark;
+  border-top: $border-light;
+  border-left: $border-light;
+}
+
+button:hover {
+  border-bottom: $border-focus-dark;
+  border-right: $border-focus-dark;
+  border-top: $border-focus-light;
+  border-left: $border-focus-light;
+}
+
+button:active {
+  background-color: $input-color;
 }
