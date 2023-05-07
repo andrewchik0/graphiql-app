@@ -22,9 +22,14 @@ export const userSlice = createSlice({
       state.token = action.payload.token;
       state.id = action.payload.id;
     },
-    removeUser(state) {
+    removeAndLogOutUser(state) {
       const auth = getAuth();
       signOut(auth);
+      state.email = null;
+      state.token = null;
+      state.id = null;
+    },
+    removeUser(state) {
       state.email = null;
       state.token = null;
       state.id = null;

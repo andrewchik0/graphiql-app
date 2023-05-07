@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { AuthErrorCodes, debugErrorMap, initializeAuth } from 'firebase/auth';
+import { AuthErrorCodes } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -38,5 +38,4 @@ export const mapErrors = (code: string) => {
 };
 
 const app = initializeApp(firebaseConfig);
-initializeAuth(app, { errorMap: debugErrorMap });
 getAnalytics(app);
