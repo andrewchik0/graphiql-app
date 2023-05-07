@@ -24,3 +24,12 @@
 .emailInput {
   margin-bottom: 20px;
 }
+
+.validationError {
+  text-align: left;
+  padding-left: 10px;
+  word-wrap: break-word;
+  width: 300px;
+  margin-bottom: 5px;
+  color: rgb(245, 140, 114);
+}
