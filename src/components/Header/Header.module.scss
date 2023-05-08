@@ -1,0 +1,82 @@
+@import '../../utils/variables';
+@import '../../utils/grid';
+
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 8px 15px;
+  border-bottom: $border-light;
+  background-color: $input-color;
+  transition: 0.3s;
+}
+
+.fixedHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 8px 15px;
+  border-bottom: $border-light;
+  border-color: rgb(30, 30, 30);
+  background-color: rgb(30, 30, 30);
+  opacity: 0.95;
+  transition: 0.3s;
+}
+
+.invisibleIntersect {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+}
+
+.headerText {
+  text-decoration: none;
+  color: $font-color;
+  font-size: 28px;
+  font-weight: 600;
+  margin-left: calc(50% + 10vw - 80px);
+}
+
+.authLink {
+  cursor: pointer;
+  margin-left: 10px;
+  height: 40px;
+}
+
+.greenbtn {
+  background-color: $green-button-color;
+  border-top: $green-border-light;
+  border-left: $green-border-light;
+  border-bottom: $green-border-dark;
+  border-right: $green-border-dark;
+}
+
+.greenbtn:hover {
+  border-top: $green-border-light-active;
+  border-left: $green-border-light-active;
+  border-bottom: $green-border-dark;
+  border-right: $green-border-dark;
+}
+
+.greenbtn:active {
+  background-color: $green-button-color-active;
+}
+
+.signoutbtn {
+  cursor: pointer;
+  margin-left: 10px;
+  padding-left: 12px;
+  padding-bottom: 5px;
+  height: 40px;
+}
+
+.textLeft {
+  text-align: end;
+}
+
+.logoutLogo {
+  filter: invert(83%) sepia(39%) saturate(78%) hue-rotate(43deg) brightness(110%) contrast(106%);
+  height: 25px;
+  position: relative;
+  top: 5px;
+}

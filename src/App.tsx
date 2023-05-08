@@ -6,6 +6,7 @@ import { setupStore } from './store/store';
 import { Provider } from 'react-redux';
 import SignInPage from './pages/Authentication/SignInPage';
 import SignUpPage from './pages/Authentication/SignUpPage';
+import Header from './components/Header/Header';
 
 const store = setupStore();
 
@@ -14,6 +15,7 @@ function App() {
     <>
       <BrowserRouter>
         <Provider store={store}>
+          <Header />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/signin" element={<SignInPage />} />
