@@ -9,6 +9,7 @@
   border-bottom: $border-light;
   background-color: $input-color;
   transition: 0.3s;
+  z-index: 10;
 }
 
 .fixedHeader {
@@ -21,6 +22,7 @@
   background-color: rgb(30, 30, 30);
   opacity: 0.95;
   transition: 0.3s;
+  z-index: 10;
 }
 
 .invisibleIntersect {

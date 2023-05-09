@@ -43,7 +43,7 @@ export default function Footer() {
           <div className={styles.name}>kovalevn89</div>
         </a>
       </div>
-      <h3 className={`${styles.col2} ${styles.year}`}>2023&nbsp;&#169;</h3>
+      <h3 className={`${styles.col2} ${styles.year}`}>2023</h3>
       <div className={`${styles.col4} ${styles.rsLogoCol}`}>
         <div className={styles.rsLogo}>
           <a href="https://rs.school/react/" target="_blank" rel="noreferrer">
