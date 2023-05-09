@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import SignInPage from './pages/Authentication/SignInPage';
 import SignUpPage from './pages/Authentication/SignUpPage';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 const store = setupStore();
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          <Footer />
         </Provider>
       </BrowserRouter>
     </>
