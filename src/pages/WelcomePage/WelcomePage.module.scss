@@ -33,7 +33,7 @@
   width: fit-content;
   position: relative;
   left: calc(50% - 21px);
-  top: 50%;
+  top: 50vh;
   opacity: 0.6;
 }
 
@@ -60,6 +60,12 @@
   position: sticky;
   top: 59px;
   overflow: hidden;
+  height: calc(100vh - 59px);
+}
+
+.rs {
+  position: relative;
+  top: -100vh;
 }
 
 .screenshotCol {
@@ -83,6 +89,15 @@
   text-align: left;
 }
 
+.afterRs {
+  position: relative;
+  top: -100vh;
+}
+
 .present {
   padding-top: 15%;
+}
+
+.footerOnWelcomePage {
+  margin-bottom: -100vh;
 }

@@ -57,7 +57,7 @@ function WelcomePage() {
     <>
       <div className={styles.welcome}>
         <div className={`${styles.team}`} style={{ height: sectionHeights[0] + 'px' }}>
-          <div className={styles.teamDesc} style={{ height: window.innerHeight + 'px' }}>
+          <div className={styles.teamDesc}>
             We are a team of student developers at the{' '}
             <a href="https://rs.school/index.html" target="_blank" rel="noreferrer">
               <img src="./external-link.svg" className={styles.logo} />
@@ -71,14 +71,12 @@ function WelcomePage() {
           </div>
         </div>
         <div
-          className={`${styles.row}`}
+          className={`${styles.row} ${styles.rs}`}
           style={{
             height: sectionHeights[1] + 'px',
-            position: 'relative',
-            top: -window.innerHeight,
           }}
         >
-          <div className={`${styles.sticky}`} style={{ height: window.innerHeight + 'px' }}>
+          <div className={`${styles.sticky}`}>
             <div
               className={`${styles.col5} ${styles.screenshotCol}`}
               style={{ transform: getRsScreenshotTransform() }}
@@ -96,30 +94,21 @@ function WelcomePage() {
           </div>
         </div>
         <div
+          className={styles.afterRs}
           style={{
             height: sectionHeights[2] + 'px',
-            position: 'relative',
-            top: -window.innerHeight,
           }}
         >
-          <div
-            className={`${styles.sticky} ${styles.present}`}
-            style={{ height: window.innerHeight + 'px' }}
-          >
+          <div className={`${styles.sticky} ${styles.present}`}>
             We present our <span className={styles.coloredSpan}>GraphiQL App</span>.
           </div>
         </div>
         <div
           style={{
             height: sectionHeights[3] + 'px',
-            position: 'relative',
-            top: -window.innerHeight,
           }}
         >
-          <div
-            className={`${styles.sticky} ${styles.present}`}
-            style={{ height: window.innerHeight + 'px', marginBottom: -window.innerHeight + 'px' }}
-          >
+          <div className={`${styles.sticky} ${styles.present} ${styles.footerOnWelcomePage}`}>
             You can <span className={styles.coloredSpan}>edit queries</span>, headers, variables and
             get response from <span className={styles.coloredSpan}>GraphQL API</span>
           </div>
