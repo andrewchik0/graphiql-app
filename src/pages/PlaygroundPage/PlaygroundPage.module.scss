@@ -1,0 +1,77 @@
+@import '../../utils/variables';
+
+.playground-page {
+  padding: 10px;
+  display: flex;
+  height: calc(100% - 20px);
+  flex-direction: row;
+  gap: 10px;
+}
+
+.request {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  &-query {
+    resize: none;
+    font-family: monospace;
+    flex: 3;
+    background-color: $input-color;
+    border: $border-dark;
+    color: $font-color;
+    padding: 8px;
+    &:focus {
+      outline: none;
+      border: $border-light;
+    }
+  }
+  &-variables {
+    resize: none;
+    font-family: monospace;
+    flex: 1;
+    background-color: $input-color;
+    border: $border-dark;
+    color: $font-color;
+    padding: 8px;
+    &:focus {
+      outline: none;
+      border: $border-light;
+    }
+  }
+  &-button {
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
+.response {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  max-height: calc(100% - 20px);
+
+  &-output {
+    display: flex;
+    flex: 1;
+    overflow-y: scroll;
+    height: auto;
+    margin: 0;
+    background-color: $input-color;
+    border: $border-dark;
+    width: 100%;
+  }
+
+  &-json {
+    padding: 5px;
+    margin: 0;
+  }
+
+  &-preloader {
+    width: 80px;
+    height: 80px;
+  }
+}
