@@ -1,9 +1,11 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import userSlice from './slices/userSlice';
+import playgroundSlice from './slices/playgroundSlice';
 import { apiSlice } from './slices/apiSlice';
 
 const rootReducer = combineReducers({
   userSlice,
+  playgroundSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
