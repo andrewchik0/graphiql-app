@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  position: relative;
+  height: calc(100vh - 58px - 97px);
   text-align: center;
 }
 

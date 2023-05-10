@@ -1,5 +1,9 @@
 .notFound {
   font-size: 30px;
   text-align: center;
-  padding-top: 40px;
+  height: calc(100vh - 58px - 97px - 1px);
+}
+
+.notFoundText {
+  padding-top: 15%;
 }
