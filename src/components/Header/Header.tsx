@@ -35,7 +35,7 @@ export default function Header() {
             <>
               <button
                 className={`${styles.authLink} ${styles.greenbtn}`}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/playground')}
               >
                 Go to Playground
               </button>
