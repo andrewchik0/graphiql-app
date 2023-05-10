@@ -10,7 +10,7 @@ export const apiSlice = createApi({
   endpoints(builder) {
     return {
       fetchResult: builder.query({
-        query: ({ queryString, variables = {} }) => ({
+        query: ({ queryString, variables }) => ({
           url: '/',
           method: 'POST',
 

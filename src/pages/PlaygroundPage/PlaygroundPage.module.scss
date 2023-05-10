@@ -53,11 +53,10 @@
   padding: 0;
   margin: 0;
   max-height: calc(100% - 20px);
-
   &-output {
     display: flex;
     flex: 1;
-    overflow-y: scroll;
+    overflow: scroll;
     height: auto;
     margin: 0;
     background-color: $input-color;
@@ -68,10 +67,17 @@
   &-json {
     padding: 5px;
     margin: 0;
+    white-space: pre-wrap;
   }
 
   &-preloader {
     width: 80px;
     height: 80px;
   }
+}
+
+.error-text {
+  font-size: 20px;
+  padding: 20px;
+  color: rgb(245, 140, 114);
 }
