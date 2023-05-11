@@ -3,7 +3,9 @@
 .playground-page {
   padding: 10px;
   display: flex;
-  flex: 1;
+  flex-grow: 1;
+  flex-basis: 0;
+  overflow-y: auto;
   flex-direction: row;
   gap: 10px;
 }
