@@ -8,6 +8,7 @@ import SignUpPage from './pages/Authentication/SignUpPage';
 import PlaygroundPage from './pages/PlaygroundPage/PlaygroundPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Layout from './components/Layout/Layout';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const store = setupStore();
 
@@ -20,7 +21,14 @@ function App() {
             <Route index element={<WelcomePage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />
-            <Route path="playground" element={<PlaygroundPage />} />
+            <Route
+              path="playground"
+              element={
+                <ProtectedRoute>
+                  <PlaygroundPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

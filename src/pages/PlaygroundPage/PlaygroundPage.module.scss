@@ -3,8 +3,7 @@
 .playground-page {
   padding: 10px;
   display: flex;
-  // height: calc(100vh - headerHeight - footerHeight - playgroundPadding);
-  height: calc(100vh - 58.5px - 97px - 20px);
+  flex: 1;
   flex-direction: row;
   gap: 10px;
 }
