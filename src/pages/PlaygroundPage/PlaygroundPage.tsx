@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
+
 import { useLazyFetchResultQuery } from '../../store/slices/apiSlice';
 import { isValidJSON } from '../../utils/utils';
 import Roller from '../../components/Roller/Roller';
@@ -7,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { playgroundSlice } from '../../store/slices/playgroundSlice';
 
 import styles from './PlaygroundPage.module.scss';
+import Editor from '../../components/Editor/Editor';
 
 const PlaygroundPage = () => {
   const [trigger, { data, error, isError, isFetching }] = useLazyFetchResultQuery();
@@ -30,11 +32,11 @@ const PlaygroundPage = () => {
     }
   };
 
-  const handleVariablesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setVariablesValue(e.target.value);
+  const handleVariablesChange = (value: string) => {
+    setVariablesValue(value);
   };
-  const handleQueryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQueryValue(e.target.value);
+  const handleQueryChange = (value: string) => {
+    setQueryValue(value);
   };
 
   useEffect(() => {
@@ -68,17 +70,26 @@ const PlaygroundPage = () => {
     <div className={styles.playgroundPage}>
       <div className={styles.request}>
         <label>Query</label>
-        <textarea
-          className={styles.requestQuery}
-          value={queryValue}
-          onChange={handleQueryChange}
-        ></textarea>
+
+        <section className={styles.requestQuery}>
+          <Editor
+            className={styles.requestQueryEditor}
+            value={queryValue}
+            handleChange={handleQueryChange}
+            type="graphql"
+          />
+        </section>
+
         <label>Variables</label>
-        <textarea
-          className={styles.requestVariables}
-          value={variablesValue}
-          onChange={handleVariablesChange}
-        ></textarea>
+
+        <section className={styles.requestVariables}>
+          <Editor
+            className={styles.requestVariablesEditor}
+            value={variablesValue}
+            handleChange={handleVariablesChange}
+            type="json"
+          />
+        </section>
         <button className={styles.requestButton} onClick={handleRun}>
           Run
         </button>

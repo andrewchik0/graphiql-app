@@ -11,8 +11,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@uiw/codemirror-theme-material": "^4.19.16",
+    "@uiw/react-codemirror": "^4.19.16",
     "classnames": "^2.3.2",
+    "cm6-graphql": "^0.0.7",
     "firebase": "^9.21.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

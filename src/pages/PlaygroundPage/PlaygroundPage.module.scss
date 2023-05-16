@@ -16,29 +16,29 @@
   flex: 1;
   gap: 10px;
   &-query {
-    resize: none;
-    font-family: monospace;
-    flex: 3;
+    flex-grow: 3;
+    flex-basis: 0;
+    overflow-y: auto;
     background-color: $input-color;
     border: $border-dark;
     color: $font-color;
-    padding: 8px;
-    &:focus {
-      outline: none;
-      border: $border-light;
+
+    &-editor {
+      display: flex;
+      height: 100%;
     }
   }
   &-variables {
-    resize: none;
-    font-family: monospace;
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
     background-color: $input-color;
     border: $border-dark;
     color: $font-color;
-    padding: 8px;
-    &:focus {
-      outline: none;
-      border: $border-light;
+
+    &-editor {
+      display: flex;
+      height: 100%;
     }
   }
   &-button {
