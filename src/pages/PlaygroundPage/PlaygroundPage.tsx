@@ -20,10 +20,13 @@ const PlaygroundPage = () => {
     const haveVariables = variablesValue.trim().length > 1;
     if (!haveVariables || isValidJSON(variablesValue)) {
       setIsVariablesValid(true);
-      trigger({
-        queryString: queryValue,
-        variables: haveVariables ? JSON.parse(variablesValue) : {},
-      });
+      trigger(
+        {
+          queryString: queryValue,
+          variables: haveVariables ? JSON.parse(variablesValue) : {},
+        },
+        true
+      );
     } else {
       setResponseValue(`Variables JSON is not valid`);
       setIsVariablesValid(false);
