@@ -1,8 +1,14 @@
-export const isValidJSON = (string: string) => {
+export const validateJSON = (string: string) => {
+  const isEmptyJSON = string.trim().length < 1;
+  if (isEmptyJSON) return { isValidJSON: true, jsonData: {} };
+  let json;
   try {
-    JSON.parse(string);
+    json = JSON.parse(string);
   } catch (e) {
-    return false;
+    const errors = [new Error('Variables JSON is not valid\n')];
+    if (e instanceof SyntaxError) errors.push(e);
+
+    return { isValidJSON: false, jsonData: { errors } };
   }
-  return true;
+  return { isValidJSON: true, jsonData: json };
 };

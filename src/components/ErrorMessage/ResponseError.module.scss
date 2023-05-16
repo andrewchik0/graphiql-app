@@ -1,0 +1,23 @@
+@import '../../utils/variables';
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: $error-background;
+  font-family: monospace;
+  flex-grow: 0;
+  gap: 16px;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  &-message {
+    margin: 0;
+  }
+  &-location {
+    text-indent: 2em;
+    margin: 0;
+  }
+}

@@ -1,59 +1,70 @@
 import { useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
 import { useLazyFetchResultQuery } from '../../store/slices/apiSlice';
-import { isValidJSON } from '../../utils/utils';
 import Roller from '../../components/Roller/Roller';
+import ResponseError, { IErrorMessage } from '../../components/ErrorMessage/ResponseError';
+import Editor from '../../components/Editor/Editor';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { playgroundSlice } from '../../store/slices/playgroundSlice';
-
+import { validateJSON } from '../../utils/utils';
 import styles from './PlaygroundPage.module.scss';
 
 const PlaygroundPage = () => {
-  const [trigger, { data, error, isError, isFetching }] = useLazyFetchResultQuery();
+  const [trigger, { data, error, isError, isFetching, isLoading }] = useLazyFetchResultQuery();
   const storedPlaygroundValues = useAppSelector((store) => store.playgroundSlice);
   const dispatch = useAppDispatch();
-  const [variablesValue, setVariablesValue] = useState(storedPlaygroundValues.variables || '');
-  const [queryValue, setQueryValue] = useState(storedPlaygroundValues.query || '');
+
+  const [variablesValue, setVariablesValue] = useState(
+    storedPlaygroundValues.variables || localStorage.getItem('variables') || ''
+  );
+  const [queryValue, setQueryValue] = useState(
+    storedPlaygroundValues.query || localStorage.getItem('gql-query') || ''
+  );
   const [responseValue, setResponseValue] = useState(``);
-  const [isVariablesValid, setIsVariablesValid] = useState(true);
+  const [responseErrors, setResponseErrors] = useState<IErrorMessage | null>(null);
   const handleRun = () => {
-    const haveVariables = variablesValue.trim().length > 1;
-    if (!haveVariables || isValidJSON(variablesValue)) {
-      setIsVariablesValid(true);
+    setResponseErrors(null);
+    const { jsonData, isValidJSON } = validateJSON(variablesValue);
+    if (isValidJSON) {
       trigger(
         {
           queryString: queryValue,
-          variables: haveVariables ? JSON.parse(variablesValue) : {},
+          variables: jsonData,
         },
         true
       );
     } else {
-      setResponseValue(`Variables JSON is not valid`);
-      setIsVariablesValid(false);
+      setResponseErrors(jsonData);
     }
   };
 
-  const handleVariablesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setVariablesValue(e.target.value);
+  const handleVariablesChange = (value: string) => {
+    setVariablesValue(value);
   };
-  const handleQueryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQueryValue(e.target.value);
+  const handleQueryChange = (value: string) => {
+    setQueryValue(value);
   };
 
   useEffect(() => {
-    if (!isFetching) {
-      setResponseValue(
-        JSON.stringify(
-          isError && error !== undefined ? ('data' in error ? error.data : error) : data,
-          null,
-          2
-        )
-      );
+    if (!isFetching && !isLoading) {
+      if (data?.errors) {
+        setResponseErrors(data);
+        return;
+      } else if (isError && error !== undefined) {
+        const errors =
+          'data' in error
+            ? (error.data as IErrorMessage).errors
+            : [new Error(JSON.stringify(error))];
+        setResponseErrors({ errors });
+        return;
+      }
+      setResponseValue(JSON.stringify(data, null, 2));
     }
-  }, [isError, isFetching, error, data]);
+  }, [isError, isFetching, error, data, isLoading]);
 
   const onUnmount = useRef<() => void>();
   onUnmount.current = () => {
+    localStorage.setItem('gql-query', queryValue);
+    localStorage.setItem('gql-variables', variablesValue);
     dispatch(
       playgroundSlice.actions.setPlaygroundValues({
         variables: variablesValue,
@@ -71,17 +82,16 @@ const PlaygroundPage = () => {
     <div className={styles.playgroundPage}>
       <div className={styles.request}>
         <label>Query</label>
-        <textarea
-          className={styles.requestQuery}
-          value={queryValue}
-          onChange={handleQueryChange}
-        ></textarea>
+
+        <section className={styles.requestQuery}>
+          <Editor value={queryValue} handleChange={handleQueryChange} type="graphql" />
+        </section>
+
         <label>Variables</label>
-        <textarea
-          className={styles.requestVariables}
-          value={variablesValue}
-          onChange={handleVariablesChange}
-        ></textarea>
+
+        <section className={styles.requestVariables}>
+          <Editor value={variablesValue} handleChange={handleVariablesChange} type="json" />
+        </section>
         <button className={styles.requestButton} onClick={handleRun}>
           Run
         </button>
@@ -92,10 +102,10 @@ const PlaygroundPage = () => {
         <div className={styles.responseOutput}>
           {isFetching ? (
             <Roller scale={1} x={0} y={0} style={{ margin: 'auto' }} />
+          ) : responseErrors ? (
+            <ResponseError errors={responseErrors.errors} />
           ) : (
-            <pre className={cn(styles.responseJson, { [styles.errorText]: !isVariablesValid })}>
-              {responseValue}
-            </pre>
+            <Editor value={responseValue} type="json" readOnly={true} />
           )}
         </div>
       </div>

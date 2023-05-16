@@ -15,31 +15,22 @@
   flex-direction: column;
   flex: 1;
   gap: 10px;
+  overflow: auto;
   &-query {
-    resize: none;
-    font-family: monospace;
-    flex: 3;
+    flex-grow: 3;
+    flex-basis: 0;
+    overflow-y: auto;
     background-color: $input-color;
     border: $border-dark;
     color: $font-color;
-    padding: 8px;
-    &:focus {
-      outline: none;
-      border: $border-light;
-    }
   }
   &-variables {
-    resize: none;
-    font-family: monospace;
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
     background-color: $input-color;
     border: $border-dark;
     color: $font-color;
-    padding: 8px;
-    &:focus {
-      outline: none;
-      border: $border-light;
-    }
   }
   &-button {
     height: 30px;
@@ -50,26 +41,18 @@
 .response {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   flex: 1;
-  padding: 0;
-  margin: 0;
-  max-height: 100%;
+  gap: 10px;
+  overflow: auto;
   &-output {
-    display: flex;
-    flex: 1;
-    overflow: scroll;
-    height: auto;
-    margin: 0;
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
     background-color: $input-color;
     border: $border-dark;
-    width: 100%;
-  }
-
-  &-json {
-    padding: 5px;
-    margin: 0;
-    white-space: pre-wrap;
+    color: $font-color;
+    display: flex;
+    flex-direction: column;
   }
 
   &-preloader {
