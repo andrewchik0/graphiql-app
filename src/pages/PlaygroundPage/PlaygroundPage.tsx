@@ -12,8 +12,13 @@ const PlaygroundPage = () => {
   const [trigger, { data, error, isError, isFetching, isLoading }] = useLazyFetchResultQuery();
   const storedPlaygroundValues = useAppSelector((store) => store.playgroundSlice);
   const dispatch = useAppDispatch();
-  const [variablesValue, setVariablesValue] = useState(storedPlaygroundValues.variables || '');
-  const [queryValue, setQueryValue] = useState(storedPlaygroundValues.query || '');
+
+  const [variablesValue, setVariablesValue] = useState(
+    storedPlaygroundValues.variables || localStorage.getItem('variables') || ''
+  );
+  const [queryValue, setQueryValue] = useState(
+    storedPlaygroundValues.query || localStorage.getItem('gql-query') || ''
+  );
   const [responseValue, setResponseValue] = useState(``);
   const [responseErrors, setResponseErrors] = useState<IErrorMessage | null>(null);
   const handleRun = () => {
@@ -42,12 +47,11 @@ const PlaygroundPage = () => {
         setResponseErrors(data);
         return;
       } else if (isError && error !== undefined) {
-        if ('data' in error) {
-          const { errors } = error.data as IErrorMessage;
-          setResponseErrors({ errors: errors });
-        } else {
-          setResponseErrors({ errors: [new Error(JSON.stringify(error))] });
-        }
+        const errors =
+          'data' in error
+            ? (error.data as IErrorMessage).errors
+            : [new Error(JSON.stringify(error))];
+        setResponseErrors({ errors });
         return;
       }
       setResponseValue(JSON.stringify(data, null, 2));
@@ -56,6 +60,8 @@ const PlaygroundPage = () => {
 
   const onUnmount = useRef<() => void>();
   onUnmount.current = () => {
+    localStorage.setItem('gql-query', queryValue);
+    localStorage.setItem('gql-variables', variablesValue);
     dispatch(
       playgroundSlice.actions.setPlaygroundValues({
         variables: variablesValue,
