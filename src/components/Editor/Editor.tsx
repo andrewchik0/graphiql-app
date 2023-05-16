@@ -38,7 +38,7 @@ const Editor: React.FC<IEditor> = ({
           foreground: 'white',
           selectionMatch: 'transparent',
           selection: 'transparent',
-          gutterBackground: readOnly ? 'transparent' : 'rgb(0 0 0 / 10%);',
+          gutterBackground: readOnly ? 'transparent' : 'rgb(43, 43, 40)',
           gutterForeground: 'rgb(253 253 253 / 60%);',
           gutterActiveForeground: 'rgb(255 255 255 / 100%);',
         },

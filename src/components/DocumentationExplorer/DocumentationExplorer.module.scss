@@ -1,12 +1,8 @@
 @import '../../utils/variables';
 
 .explorer {
-  position: fixed;
-  right: 10px;
   height: 100%;
-  width: min-content;
-  min-width: 22%;
-  margin: -10px;
+  width: 100%;
   background-color: $background-color;
   border-left: $border-light;
   display: flex;

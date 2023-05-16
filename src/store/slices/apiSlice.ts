@@ -24,7 +24,7 @@ export const apiSlice = createApi({
           },
           body: JSON.stringify({
             query: query.queryString,
-            ...query.variables,
+            variables: query.variables,
           }),
         }),
       }),

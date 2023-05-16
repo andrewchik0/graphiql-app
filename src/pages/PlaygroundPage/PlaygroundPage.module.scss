@@ -8,8 +8,11 @@
   overflow-y: auto;
   flex-direction: row;
   gap: 10px;
+  position: relative;
 }
-
+.label {
+  margin-left: 8px;
+}
 .request {
   display: flex;
   flex-direction: column;
@@ -23,6 +26,9 @@
     background-color: $input-color;
     border: $border-dark;
     color: $font-color;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
   }
   &-variables {
     flex-grow: 1;
@@ -32,12 +38,35 @@
     border: $border-dark;
     color: $font-color;
   }
-  &-button {
-    height: 30px;
-    font-size: 16px;
+}
+.button {
+  height: 36px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 8px;
+  width: 40px;
+
+  & .tooltip {
+    position: absolute;
+    background-color: $button-color;
+    color: $font-color;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 88px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    display: block;
+    z-index: 10;
+  }
+  &:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
   }
 }
-
 .response {
   display: flex;
   flex-direction: column;
@@ -65,4 +94,16 @@
   font-size: 20px;
   padding: 20px;
   color: rgb(245, 140, 114);
+}
+
+.documentation-wrapper {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  width: min-content;
+  min-width: 540px;
+  margin: -10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
 }
