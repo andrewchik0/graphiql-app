@@ -7,7 +7,7 @@ import cn from 'classnames';
 import styles from './Editor.module.scss';
 
 interface IEditor {
-  className?: string;
+  customClassName?: string;
   type: 'json' | 'graphql';
   value: string;
   handleChange?: (value: string) => void;
@@ -15,7 +15,7 @@ interface IEditor {
 }
 
 const Editor: React.FC<IEditor> = ({
-  className,
+  customClassName,
   type,
   value,
   handleChange,
@@ -24,7 +24,7 @@ const Editor: React.FC<IEditor> = ({
   const extesionArray = type === 'graphql' ? [graphql()] : type === 'json' ? [json()] : [];
   return (
     <CodeMirror
-      className={cn(styles.editor, { className: className !== undefined })}
+      className={cn(styles.editor, customClassName)}
       minWidth="100%"
       minHeight="100%"
       theme={materialDarkInit({
@@ -33,13 +33,15 @@ const Editor: React.FC<IEditor> = ({
           lineHighlight: 'transparent',
           foreground: 'white',
           selectionMatch: 'transparent',
+          selection: 'transparent',
+          gutterBackground: 'transparent',
           gutterForeground: 'rgb(253 253 253 / 60%);',
           gutterActiveForeground: 'rgb(255 255 255 / 100%);',
         },
       })}
       readOnly={readOnly}
       extensions={extesionArray}
-      basicSetup={{ searchKeymap: false }}
+      basicSetup={{ searchKeymap: false, lineNumbers: !readOnly }}
       value={value}
       onChange={handleChange}
     />

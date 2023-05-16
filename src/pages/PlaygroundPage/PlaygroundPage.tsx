@@ -72,23 +72,13 @@ const PlaygroundPage = () => {
         <label>Query</label>
 
         <section className={styles.requestQuery}>
-          <Editor
-            className={styles.requestQueryEditor}
-            value={queryValue}
-            handleChange={handleQueryChange}
-            type="graphql"
-          />
+          <Editor value={queryValue} handleChange={handleQueryChange} type="graphql" />
         </section>
 
         <label>Variables</label>
 
         <section className={styles.requestVariables}>
-          <Editor
-            className={styles.requestVariablesEditor}
-            value={variablesValue}
-            handleChange={handleVariablesChange}
-            type="json"
-          />
+          <Editor value={variablesValue} handleChange={handleVariablesChange} type="json" />
         </section>
         <button className={styles.requestButton} onClick={handleRun}>
           Run
@@ -101,9 +91,10 @@ const PlaygroundPage = () => {
           {isFetching ? (
             <Roller scale={1} x={0} y={0} style={{ margin: 'auto' }} />
           ) : (
-            <pre className={cn(styles.responseJson, { [styles.errorText]: !isVariablesValid })}>
-              {responseValue}
-            </pre>
+            // <pre className={cn(styles.responseJson, { [styles.errorText]: !isVariablesValid })}>
+            //   {responseValue}
+            // </pre>
+            <Editor value={responseValue} type="json" readOnly={true} />
           )}
         </div>
       </div>
