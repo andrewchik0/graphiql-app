@@ -2,6 +2,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { materialDarkInit } from '@uiw/codemirror-theme-material';
 import { graphql } from 'cm6-graphql';
 import { json } from '@codemirror/lang-json';
+import { EditorView } from '@codemirror/view';
 import cn from 'classnames';
 
 import styles from './Editor.module.scss';
@@ -13,7 +14,6 @@ interface IEditor {
   handleChange?: (value: string) => void;
   readOnly?: boolean;
 }
-
 const Editor: React.FC<IEditor> = ({
   customClassName,
   type,
@@ -21,7 +21,11 @@ const Editor: React.FC<IEditor> = ({
   handleChange,
   readOnly = false,
 }: IEditor) => {
-  const extesionArray = type === 'graphql' ? [graphql()] : type === 'json' ? [json()] : [];
+  const extesionArray = [
+    ...(type === 'graphql' ? [graphql()] : [json()]),
+    ...(readOnly ? [EditorView.lineWrapping] : []),
+  ];
+
   return (
     <CodeMirror
       className={cn(styles.editor, customClassName)}
@@ -34,7 +38,7 @@ const Editor: React.FC<IEditor> = ({
           foreground: 'white',
           selectionMatch: 'transparent',
           selection: 'transparent',
-          gutterBackground: 'transparent',
+          gutterBackground: readOnly ? 'transparent' : 'rgb(0 0 0 / 10%);',
           gutterForeground: 'rgb(253 253 253 / 60%);',
           gutterActiveForeground: 'rgb(255 255 255 / 100%);',
         },

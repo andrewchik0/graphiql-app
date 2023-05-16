@@ -52,6 +52,7 @@
     border: $border-dark;
     color: $font-color;
     display: flex;
+    flex-direction: column;
   }
 
   &-preloader {

@@ -1,34 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
-
 import { useLazyFetchResultQuery } from '../../store/slices/apiSlice';
-import { isValidJSON } from '../../utils/utils';
 import Roller from '../../components/Roller/Roller';
+import ResponseError, { IErrorMessage } from '../../components/ErrorMessage/ResponseError';
+import Editor from '../../components/Editor/Editor';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { playgroundSlice } from '../../store/slices/playgroundSlice';
-
+import { validateJSON } from '../../utils/utils';
 import styles from './PlaygroundPage.module.scss';
-import Editor from '../../components/Editor/Editor';
 
 const PlaygroundPage = () => {
-  const [trigger, { data, error, isError, isFetching }] = useLazyFetchResultQuery();
+  const [trigger, { data, error, isError, isFetching, isLoading }] = useLazyFetchResultQuery();
   const storedPlaygroundValues = useAppSelector((store) => store.playgroundSlice);
   const dispatch = useAppDispatch();
   const [variablesValue, setVariablesValue] = useState(storedPlaygroundValues.variables || '');
   const [queryValue, setQueryValue] = useState(storedPlaygroundValues.query || '');
   const [responseValue, setResponseValue] = useState(``);
-  const [isVariablesValid, setIsVariablesValid] = useState(true);
+  const [responseErrors, setResponseErrors] = useState<IErrorMessage | null>(null);
   const handleRun = () => {
-    const haveVariables = variablesValue.trim().length > 1;
-    if (!haveVariables || isValidJSON(variablesValue)) {
-      setIsVariablesValid(true);
+    setResponseErrors(null);
+    const { jsonData, isValidJSON } = validateJSON(variablesValue);
+    if (isValidJSON) {
       trigger({
         queryString: queryValue,
-        variables: haveVariables ? JSON.parse(variablesValue) : {},
+        variables: jsonData,
       });
     } else {
-      setResponseValue(`Variables JSON is not valid`);
-      setIsVariablesValid(false);
+      setResponseErrors(jsonData);
     }
   };
 
@@ -40,16 +37,22 @@ const PlaygroundPage = () => {
   };
 
   useEffect(() => {
-    if (!isFetching) {
-      setResponseValue(
-        JSON.stringify(
-          isError && error !== undefined ? ('data' in error ? error.data : error) : data,
-          null,
-          2
-        )
-      );
+    if (!isFetching && !isLoading) {
+      if (data?.errors) {
+        setResponseErrors(data);
+        return;
+      } else if (isError && error !== undefined) {
+        if ('data' in error) {
+          const { errors } = error.data as IErrorMessage;
+          setResponseErrors({ errors: errors });
+        } else {
+          setResponseErrors({ errors: [new Error(JSON.stringify(error))] });
+        }
+        return;
+      }
+      setResponseValue(JSON.stringify(data, null, 2));
     }
-  }, [isError, isFetching, error, data]);
+  }, [isError, isFetching, error, data, isLoading]);
 
   const onUnmount = useRef<() => void>();
   onUnmount.current = () => {
@@ -90,10 +93,9 @@ const PlaygroundPage = () => {
         <div className={styles.responseOutput}>
           {isFetching ? (
             <Roller scale={1} x={0} y={0} style={{ margin: 'auto' }} />
+          ) : responseErrors ? (
+            <ResponseError errors={responseErrors.errors} />
           ) : (
-            // <pre className={cn(styles.responseJson, { [styles.errorText]: !isVariablesValid })}>
-            //   {responseValue}
-            // </pre>
             <Editor value={responseValue} type="json" readOnly={true} />
           )}
         </div>
