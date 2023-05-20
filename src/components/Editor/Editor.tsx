@@ -10,7 +10,7 @@ import styles from './Editor.module.scss';
 interface IEditor {
   customClassName?: string;
   type: 'json' | 'graphql';
-  value: string;
+  value?: string;
   handleChange?: (value: string) => void;
   readOnly?: boolean;
 }
