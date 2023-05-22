@@ -123,8 +123,8 @@ function WelcomePage() {
             <div className={styles.images}>
               <div className={styles.appScreenshot} />
               <div className={styles.responseImage} />
-              <img src="/images/app.png" alt="" className={styles.appimg}/>
-              <img src="/images/response.png" alt="" className={styles.responseimg}/>
+              <img src="/images/app.png" alt="" className={styles.appimg} />
+              <img src="/images/response.png" alt="" className={styles.responseimg} />
             </div>
           </div>
         </div>
