@@ -112,3 +112,12 @@
     transform: translateX(0);
   }
 }
+
+@media screen and (max-width: 540px) {
+  .documentation-wrapper {
+    font-size: 16px;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+}

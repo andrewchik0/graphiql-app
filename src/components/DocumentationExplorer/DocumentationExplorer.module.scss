@@ -110,3 +110,13 @@
   padding: 1px 4px;
   border-radius: 4px;
 }
+
+@media screen and (max-width: 540px) {
+  .type-name {
+    font-size: 20px;
+  }
+
+  .response {
+    font-size: 14px;
+  }
+}

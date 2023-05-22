@@ -4,12 +4,20 @@ import styles from './WelcomePage.module.scss';
 function WelcomePage() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [sectionRatios, setSectionRatios] = useState<number[]>([]);
+  const [isAnimate, setIsAnimate] = useState(window.innerWidth > 1200);
   const sectionHeights = [
     window.innerHeight,
     window.innerHeight * 3.5,
     window.innerHeight * 2,
     window.innerHeight * 2,
   ];
+
+  if (!isAnimate) {
+    for (let i = 0; i < sectionHeights.length; i++) {
+      sectionHeights[i] = window.innerHeight;
+    }
+    sectionHeights[1] = window.innerHeight * 2;
+  }
 
   const handleScroll = () => {
     setScrollPosition(window.pageYOffset);
@@ -28,13 +36,18 @@ function WelcomePage() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', () => setIsAnimate(window.innerWidth > 1200));
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', () => setIsAnimate(window.innerWidth > 1200));
     };
   });
 
   const getRsDescTransform = () => {
+    if (!isAnimate) {
+      return '';
+    }
     if (sectionRatios[1] < 0) {
       return `translateX(${-sectionRatios[1] * 2000}px)`;
     }
@@ -44,10 +57,16 @@ function WelcomePage() {
   };
 
   const getCircleTransform = () => {
+    if (!isAnimate) {
+      return '';
+    }
     return `scale(${sectionRatios[0] * 50 + 5})`;
   };
 
   const getRsScreenshotTransform = () => {
+    if (!isAnimate) {
+      return '';
+    }
     if (sectionRatios[1] > 0.4) {
       return `translateX(${-(sectionRatios[1] - 0.4) * 2000}px)`;
     }
@@ -76,7 +95,7 @@ function WelcomePage() {
             height: sectionHeights[1] + 'px',
           }}
         >
-          <div className={`${styles.sticky}`}>
+          <div className={`${styles.sticky} ${styles.flex}`}>
             <div
               className={`${styles.col5} ${styles.screenshotCol}`}
               style={{ transform: getRsScreenshotTransform() }}
@@ -99,18 +118,14 @@ function WelcomePage() {
             height: sectionHeights[2] + 'px',
           }}
         >
-          <div className={`${styles.sticky} ${styles.present}`}>
-            We present our <span className={styles.coloredSpan}>GraphiQL App</span>.
-          </div>
-        </div>
-        <div
-          style={{
-            height: sectionHeights[3] + 'px',
-          }}
-        >
           <div className={`${styles.sticky} ${styles.present} ${styles.footerOnWelcomePage}`}>
-            You can <span className={styles.coloredSpan}>edit queries</span>, headers, variables and
-            get response from <span className={styles.coloredSpan}>GraphQL API</span>
+            We present our <span className={styles.coloredSpan}>GraphiQL App</span>.
+            <div className={styles.images}>
+              <div className={styles.appScreenshot} />
+              <div className={styles.responseImage} />
+              <img src="/images/app.png" alt="" className={styles.appimg}/>
+              <img src="/images/response.png" alt="" className={styles.responseimg}/>
+            </div>
           </div>
         </div>
       </div>
