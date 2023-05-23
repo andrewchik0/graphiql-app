@@ -1,5 +1,6 @@
 @import '../../utils/variables';
 @import '../../utils/grid';
+@import '../../utils/breakpoints';
 
 .header {
   position: -webkit-sticky;
@@ -33,17 +34,15 @@
   width: 100%;
 }
 
-@media screen and (min-width: 1500px) {
-  .mainHeader {
-    flex: 6;
-  }
-
-  .buttons {
-    flex: 2;
-  }
+.mainHeader {
+  flex: 6;
 }
 
-@media screen and (min-width: 768px) {
+.buttons {
+  flex: 2;
+}
+
+@media screen and (max-width: $bp-xxl) {
   .mainHeader {
     flex: 1;
   }
@@ -53,7 +52,7 @@
   }
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (max-width: $bp-sm) {
   .mainHeader {
     flex: 1;
   }
@@ -114,7 +113,7 @@
   top: 5px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $bp-lg) {
   .headerText {
     font-size: 20px;
     margin-bottom: 100px;
@@ -139,7 +138,7 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: $bp-md) {
   .header {
     flex-direction: column;
   }

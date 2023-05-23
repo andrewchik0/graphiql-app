@@ -1,5 +1,6 @@
 @import '../../utils/variables';
 @import '../../utils/grid';
+@import '../../utils/breakpoints';
 
 .footer {
   border-top: $border-dark;
@@ -59,7 +60,7 @@
   height: 50px;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: $bp-xxl) {
   .footer {
     padding: 5px;
   }

@@ -1,5 +1,6 @@
 @import '../../utils/variables';
 @import '../../utils/grid';
+@import '../../utils/breakpoints';
 
 .welcome {
   font-size: 50px;
@@ -134,7 +135,7 @@
   display: none;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: $bp-xl) {
   .circle1 {
     display: none;
   }
@@ -156,7 +157,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $bp-lg) {
   .welcome {
     font-size: 26px;
   }
@@ -212,7 +213,7 @@
   }
 }
 
-@media screen and (min-width: 360px) {
+@media screen and (max-width: $bp-sm) {
   .responseimg {
     display: none;
   }
