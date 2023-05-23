@@ -1,3 +1,5 @@
+@import '../../utils/breakpoints';
+
 .form {
   display: flex;
   align-items: center;
@@ -33,4 +35,14 @@
   width: 300px;
   margin-bottom: 5px;
   color: rgb(245, 140, 114);
+}
+
+@media screen and (max-width: $bp-md) {
+  .emailInput {
+    width: 90vw;
+  }
+
+  .passwordInput {
+    width: 90vw;
+  }
 }

@@ -24,13 +24,13 @@ export default function Header() {
   return (
     <>
       <div ref={ref} className={styles.invisibleIntersect}></div>
-      <div className={`${isIntersecting ? styles.header : styles.fixedHeader} ${styles.row}`}>
-        <div className={styles.col8}>
+      <div className={`${isIntersecting ? styles.header : styles.fixedHeader}`}>
+        <div className={styles.mainHeader}>
           <Link to="/" className={styles.headerText}>
-            GraphiQL App
+            GraphiQL&nbsp;App
           </Link>
         </div>
-        <div className={`${styles.col2} ${styles.textLeft}`}>
+        <div className={`${styles.buttons} ${styles.textLeft}`}>
           {user.isAuth ? (
             <>
               <button

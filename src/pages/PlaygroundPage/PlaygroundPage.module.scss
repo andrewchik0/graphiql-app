@@ -1,4 +1,5 @@
 @import '../../utils/variables';
+@import '../../utils/breakpoints';
 
 .playground-page {
   padding: 10px;
@@ -110,5 +111,14 @@
   transform: translateX(100%);
   &-show {
     transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: $bp-sm) {
+  .documentation-wrapper {
+    font-size: 16px;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
   }
 }

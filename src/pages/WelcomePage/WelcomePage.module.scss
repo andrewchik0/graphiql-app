@@ -1,5 +1,6 @@
 @import '../../utils/variables';
 @import '../../utils/grid';
+@import '../../utils/breakpoints';
 
 .welcome {
   font-size: 50px;
@@ -14,7 +15,7 @@
   overflow: hidden;
 }
 
-.teamDesc {
+.team-desc {
   margin: auto;
   padding-top: 18%;
 }
@@ -68,9 +69,9 @@
   top: -100vh;
 }
 
-.screenshotCol {
+.screenshot-col {
   text-align: end;
-  padding-top: 10%;
+  padding-top: calc(50vh - 225px);
 }
 
 .rsscreenshot {
@@ -85,7 +86,7 @@
 }
 
 .rsdesc {
-  padding-top: 10%;
+  padding-top: calc(50vh - 225px);
   text-align: left;
 }
 
@@ -95,9 +96,125 @@
 }
 
 .present {
-  padding-top: 15%;
+  padding-top: 20vh;
 }
 
 .footerOnWelcomePage {
   margin-bottom: -100vh;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.app-screenshot {
+  background: url(/images/app.png) no-repeat;
+  height: 600px;
+  background-position: unset center;
+  flex: 1;
+  margin-left: 15%;
+}
+
+.response-image {
+  background: url(/images/response.png) no-repeat;
+  background-position: unset center;
+  height: 600px;
+  flex: 1;
+  margin-left: 15%;
+}
+
+.appimg {
+  display: none;
+}
+
+.responseimg {
+  display: none;
+}
+
+@media screen and (max-width: $bp-xl) {
+  .circle1 {
+    display: none;
+  }
+
+  .circle3 {
+    display: none;
+  }
+
+  .circle2 {
+    display: none;
+  }
+
+  .response-image {
+    margin-left: 5%;
+  }
+
+  .app-screenshot {
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width: $bp-lg) {
+  .welcome {
+    font-size: 26px;
+  }
+
+  .team-desc {
+    padding-top: 30vh;
+  }
+
+  .logo {
+    height: 24px;
+  }
+
+  .rsdesc {
+    margin: auto;
+    float: none;
+    padding-top: 20vh;
+  }
+
+  .screenshot-col {
+    display: none;
+  }
+
+  .app-screenshot {
+    display: none;
+  }
+
+  .response-image {
+    display: none;
+  }
+
+  .images {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .present {
+    margin-top: 0;
+    padding-top: 5vh;
+  }
+
+  .appimg {
+    display: inline;
+    margin: 40px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  .responseimg {
+    display: inline;
+    margin: 40px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: $bp-sm) {
+  .responseimg {
+    display: none;
+  }
 }

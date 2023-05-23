@@ -65,6 +65,7 @@ export default function SignUpPage({
           <input
             type="password"
             placeholder="Password"
+            className={styles.passwordInput}
             {...register('password', {
               required: 'Enter a password',
               validate:
@@ -90,6 +91,7 @@ export default function SignUpPage({
             <input
               type="password"
               placeholder="Confirm Password"
+              className={styles.passwordInput}
               {...register('confirmPassword', {
                 validate: {
                   isEqual: (pas) => pas === watch('password') || 'Passwords must be the same',

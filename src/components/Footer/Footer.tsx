@@ -47,7 +47,7 @@ export default function Footer() {
       <div className={`${styles.col4} ${styles.rsLogoCol}`}>
         <div className={styles.rsLogo}>
           <a href="https://rs.school/react/" target="_blank" rel="noreferrer">
-            <img src="https://rs.school/images/rs_school_js.svg" height={50} />
+            <img src="https://rs.school/images/rs_school_js.svg" className={styles.svgLogo} />
           </a>
         </div>
       </div>
