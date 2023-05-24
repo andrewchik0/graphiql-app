@@ -11,6 +11,9 @@
   gap: 10px;
   position: relative;
   overflow-x: hidden;
+  @media (max-width: $bp-lg) {
+    flex-direction: column;
+  }
 }
 .label {
   margin-left: 8px;
@@ -40,6 +43,27 @@
     border: $border-dark;
     color: $font-color;
   }
+  @media (max-width: $bp-xl) {
+    &-query {
+      font-size: 16px;
+    }
+    &-variables {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: $bp-lg) {
+    flex: 1;
+    &-vars-opened {
+      flex: 2;
+    }
+    &-query {
+      flex-grow: 1;
+      font-size: 16px;
+    }
+    &-variables {
+      flex-grow: 1;
+    }
+  }
 }
 .button {
   height: 36px;
@@ -52,6 +76,9 @@
   margin-top: 8px;
   width: 40px;
 
+  &-icon {
+    width: 24px;
+  }
   & .tooltip {
     position: absolute;
     background-color: $button-color;
@@ -67,6 +94,20 @@
   &:hover .tooltip {
     visibility: visible;
     opacity: 1;
+  }
+  @media (max-width: $bp-xl) {
+    &:hover .tooltip {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+  @media (max-width: $bp-md) {
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    &-icon {
+      width: 18px;
+    }
   }
 }
 .response {
@@ -90,6 +131,11 @@
     width: 80px;
     height: 80px;
   }
+  @media (max-width: $bp-xl) {
+    &-output {
+      font-size: 16px;
+    }
+  }
 }
 
 .error-text {
@@ -112,13 +158,19 @@
   &-show {
     transform: translateX(0);
   }
-}
-
-@media screen and (max-width: $bp-sm) {
-  .documentation-wrapper {
+  @media screen and (max-width: $bp-sm) {
     font-size: 16px;
     min-width: auto;
     max-width: none;
     width: 100%;
   }
+}
+
+.fold-icon {
+  height: 1em;
+  margin-bottom: -0.25em;
+}
+
+.vars-closed {
+  flex-grow: 0;
 }
