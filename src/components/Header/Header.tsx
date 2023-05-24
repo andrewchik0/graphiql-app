@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { useAppDispatch } from '../../hooks/redux';
 import { userSlice } from '../../store/slices/userSlice';
@@ -7,10 +7,12 @@ import styles from './Header.module.scss';
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useAuth();
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
+  const isPlaygroundPage = location.pathname === '/playground';
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -33,12 +35,14 @@ export default function Header() {
         <div className={`${styles.buttons} ${styles.textLeft}`}>
           {user.isAuth ? (
             <>
-              <button
-                className={`${styles.authLink} ${styles.greenbtn}`}
-                onClick={() => navigate('/playground')}
-              >
-                Go to Playground
-              </button>
+              {!isPlaygroundPage && (
+                <button
+                  className={`${styles.authLink} ${styles.greenbtn}`}
+                  onClick={() => navigate('/playground')}
+                >
+                  Go to Playground
+                </button>
+              )}
               <button
                 className={styles.signoutbtn}
                 onClick={() => dispatch(userSlice.actions.removeAndLogOutUser())}
