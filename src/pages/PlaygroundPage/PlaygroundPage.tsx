@@ -8,7 +8,6 @@ import DocumentationExplorer from '../../components/DocumentationExplorer/Docume
 import { validateJSON } from '../../utils/utils';
 
 import iconUnfold from '../../assets/images/icon-unfold.svg';
-import iconFold from '../../assets/images/icon-fold.svg';
 import iconPlayArrow from '../../assets/images/icon-play-arrow.svg';
 import iconDocumentation from '../../assets/images/icon-documentation.svg';
 import styles from './PlaygroundPage.module.scss';
@@ -16,43 +15,68 @@ import styles from './PlaygroundPage.module.scss';
 const PlaygroundPage = () => {
   const [trigger, { data, error, isError, isFetching, isLoading }] = useLazyFetchResultQuery();
   const [docIsOpen, setDocIsOpen] = useState(false);
-  const [varsIsOpen, setVarsIsOpen] = useState(true);
+  const [toolsIsOpen, setToolsIsOpen] = useState(true);
   const [responseValue, setResponseValue] = useState(``);
   const [responseErrors, setResponseErrors] = useState<IErrorMessage | null>(null);
+  const [currentTool, setCurrentTool] = useState<'variables' | 'headers'>('variables');
 
   const queryValueRef = useRef(localStorage.getItem('gql-query') || '');
   const variablesValueRef = useRef(localStorage.getItem('gql-variables') || '');
+  const headersValueRef = useRef(localStorage.getItem('gql-headers') || '');
 
   const updateQueryValue = (value: string) => {
+    localStorage.setItem('gql-query', value);
     queryValueRef.current = value;
   };
   const updateVariablesValue = (value: string) => {
+    localStorage.setItem('gql-variables', value);
     variablesValueRef.current = value;
+  };
+  const updateHeadersValue = (value: string) => {
+    headersValueRef.current = value;
+    localStorage.setItem('gql-headers', value);
   };
 
   const handleRun = () => {
     const queryValue = queryValueRef.current;
     const variablesValue = variablesValueRef.current;
+    const headersValue = headersValueRef.current;
     setResponseErrors(null);
-    const { jsonData, isValidJSON } = validateJSON(variablesValue);
-    if (isValidJSON) {
+    const { jsonData: variablesJSON, isValidJSON: isValidJSONVariables } = validateJSON(
+      variablesValue,
+      'Variables'
+    );
+    const { jsonData: headersJSON, isValidJSON: isValidJSONHeaders } = validateJSON(
+      headersValue,
+      'Headers'
+    );
+
+    if (isValidJSONVariables && isValidJSONHeaders) {
       trigger(
         {
           queryString: queryValue,
-          variables: jsonData,
+          variables: variablesJSON,
+          headers: headersJSON,
         },
         true
       );
     } else {
-      setResponseErrors(jsonData);
+      const errorList = isValidJSONVariables ? headersJSON : variablesJSON;
+      setResponseErrors(errorList);
     }
   };
   const toggleDocumentation = () => {
     setDocIsOpen(!docIsOpen);
   };
-  const toggleVariables = () => {
-    setVarsIsOpen(!varsIsOpen);
+  const toggleTools = () => {
+    setToolsIsOpen(!toolsIsOpen);
   };
+
+  const handleLabelClick = (target: 'variables' | 'headers') => {
+    setCurrentTool(target);
+    if (!toolsIsOpen) setToolsIsOpen(true);
+  };
+
   useEffect(() => {
     if (!isFetching && !isLoading) {
       if (data?.errors) {
@@ -60,7 +84,7 @@ const PlaygroundPage = () => {
         return;
       } else if (isError && error !== undefined) {
         const errors =
-          'data' in error
+          'data' in error && error.data
             ? (error.data as IErrorMessage).errors
             : [new Error(JSON.stringify(error))];
         setResponseErrors({ errors });
@@ -70,12 +94,6 @@ const PlaygroundPage = () => {
     }
   }, [isError, isFetching, error, data, isLoading]);
 
-  useEffect(() => {
-    return () => {
-      localStorage.setItem('gql-query', queryValueRef.current);
-      localStorage.setItem('gql-variables', variablesValueRef.current);
-    };
-  }, []);
   return (
     <div className={styles.playgroundPage}>
       <div
@@ -86,7 +104,7 @@ const PlaygroundPage = () => {
         <DocumentationExplorer isOpened={docIsOpen} closeHandle={toggleDocumentation} />
       </div>
 
-      <section className={cn(styles.request, { [styles.requestVarsOpened]: varsIsOpen })}>
+      <section className={cn(styles.request, { [styles.requestVarsOpened]: toolsIsOpen })}>
         <label className={styles.label}>Query</label>
 
         <div className={styles.requestQuery}>
@@ -103,17 +121,43 @@ const PlaygroundPage = () => {
           </div>
         </div>
 
-        <label className={styles.label} onClick={toggleVariables}>
-          Variables
-          <img className={styles.foldIcon} src={varsIsOpen ? iconUnfold : iconFold} alt="" />
-        </label>
+        <div className={styles.toolsLabels}>
+          <label
+            className={cn(styles.label, styles.labelTool, {
+              [styles.labelToolActive]: toolsIsOpen && currentTool === 'variables',
+            })}
+            onClick={() => handleLabelClick('variables')}
+          >
+            Variables
+          </label>
 
-        <div className={cn(styles.requestVariables, { [styles.varsClosed]: !varsIsOpen })}>
-          <Editor
-            value={variablesValueRef.current}
-            type="json"
-            handleChange={updateVariablesValue}
-          />
+          <label
+            className={cn(styles.label, styles.labelTool, {
+              [styles.labelToolActive]: toolsIsOpen && currentTool === 'headers',
+            })}
+            onClick={() => handleLabelClick('headers')}
+          >
+            Headers
+          </label>
+          <button className={styles.toolsToggleButton} onClick={toggleTools}>
+            <img
+              className={cn(styles.foldIcon, { [styles.foldIconOpened]: !toolsIsOpen })}
+              src={iconUnfold}
+              alt=""
+            />
+          </button>
+        </div>
+
+        <div className={cn(styles.requestVariables, { [styles.varsClosed]: !toolsIsOpen })}>
+          {currentTool === 'variables' ? (
+            <Editor
+              value={variablesValueRef.current}
+              type="json"
+              handleChange={updateVariablesValue}
+            />
+          ) : (
+            <Editor value={headersValueRef.current} type="json" handleChange={updateHeadersValue} />
+          )}
         </div>
       </section>
 
