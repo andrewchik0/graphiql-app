@@ -5,6 +5,7 @@ const API_URL = 'https://countries.trevorblades.com';
 export interface IQuery {
   queryString: string;
   variables: object;
+  headers: object;
 }
 
 export const apiSlice = createApi({
@@ -20,6 +21,7 @@ export const apiSlice = createApi({
           method: 'POST',
 
           headers: {
+            ...query.headers,
             'content-type': 'application/json',
           },
           body: JSON.stringify({

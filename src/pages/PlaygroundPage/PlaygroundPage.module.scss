@@ -17,7 +17,17 @@
 }
 .label {
   margin-left: 8px;
+
+  &-tool {
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover,
+    &-active {
+      opacity: 1;
+    }
+  }
 }
+
 .request {
   display: flex;
   flex-direction: column;
@@ -35,6 +45,7 @@
     flex-direction: row;
     gap: 8px;
   }
+
   &-variables {
     flex-grow: 1;
     flex-basis: 0;
@@ -166,9 +177,41 @@
   }
 }
 
+.tools {
+  &-labels {
+    display: flex;
+    gap: 10px;
+  }
+  &-toggle-button {
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    display: flex;
+    margin-left: auto;
+    border: none;
+    background: none;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      border: none;
+      background-color: rgb(58, 58, 53);
+      cursor: pointer;
+    }
+  }
+}
+
 .fold-icon {
-  height: 1em;
-  margin-bottom: -0.25em;
+  width: 24px;
+  &-opened {
+    transform: scaleY(-1);
+  }
+  @media (max-width: $bp-lg) {
+    transform: scaleY(1) rotate(0deg);
+    &-opened {
+      transform: scaleY(1) rotate(90deg);
+    }
+  }
 }
 
 .vars-closed {

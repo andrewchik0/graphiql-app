@@ -16,6 +16,7 @@ export default function DocumentationExplorer(props: DocumentationProps) {
     {
       queryString: getQueryFields(),
       variables: {},
+      headers: {},
     },
   ]);
 
@@ -34,6 +35,7 @@ export default function DocumentationExplorer(props: DocumentationProps) {
     const query: IQuery = {
       queryString: getTypeSchema(argument),
       variables: {},
+      headers: {},
     };
     const newArray = [...docTreeArray, query];
     setDocTreeArray(newArray);
