@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import useAuth from '../../hooks/useAuth';
 import { useAppDispatch } from '../../hooks/redux';
 import { userSlice } from '../../store/slices/userSlice';
@@ -26,21 +27,19 @@ export default function Header() {
   return (
     <>
       <div ref={ref} className={styles.invisibleIntersect}></div>
-      <div className={`${isIntersecting ? styles.header : styles.fixedHeader}`}>
-        <div className={styles.mainHeader}>
-          <Link to="/" className={styles.headerText}>
-            GraphiQL&nbsp;App
-          </Link>
-        </div>
-        <div className={`${styles.buttons} ${styles.textLeft}`}>
+      <div className={cn(styles.header, { [styles.headerFixed]: !isIntersecting })}>
+        <Link to="/" className={styles.headerText}>
+          GraphiQL&nbsp;App
+        </Link>
+        <div className={styles.buttons}>
           {user.isAuth ? (
             <>
               {!isPlaygroundPage && (
                 <button
-                  className={`${styles.authLink} ${styles.greenbtn}`}
+                  className={cn(styles.authLink, styles.greenbtn)}
                   onClick={() => navigate('/playground')}
                 >
-                  Go to Playground
+                  Playground
                 </button>
               )}
               <button

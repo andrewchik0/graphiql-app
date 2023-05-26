@@ -1,5 +1,4 @@
 @import '../../utils/variables';
-@import '../../utils/grid';
 @import '../../utils/breakpoints';
 
 .header {
@@ -9,23 +8,18 @@
   padding: 8px 15px;
   border-bottom: $border-light;
   background-color: $input-color;
-  transition: 0.3s;
+  transition: opacity 0.3s;
   z-index: 10;
   display: flex;
-}
-
-.fixedHeader {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  padding: 8px 15px;
-  border-bottom: $border-light;
-  border-color: rgb(30, 30, 30);
-  background-color: rgb(30, 30, 30);
-  opacity: 0.95;
-  transition: 0.3s;
-  z-index: 10;
-  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  &-fixed {
+    border-color: rgb(30, 30, 30);
+    background-color: rgb(30, 30, 30);
+    opacity: 0.95;
+  }
 }
 
 .invisibleIntersect {
@@ -34,32 +28,12 @@
   width: 100%;
 }
 
-.mainHeader {
-  flex: 6;
-}
-
 .buttons {
-  flex: 2;
-}
-
-@media screen and (max-width: $bp-xxl) {
-  .mainHeader {
-    flex: 1;
-  }
-
-  .buttons {
-    flex: 1;
-  }
-}
-
-@media screen and (max-width: $bp-sm) {
-  .mainHeader {
-    flex: 1;
-  }
-
-  .buttons {
-    flex: 1;
-  }
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .headerText {
@@ -71,7 +45,6 @@
 
 .authLink {
   cursor: pointer;
-  margin-left: 10px;
   height: 40px;
 }
 
@@ -81,83 +54,80 @@
   border-left: $green-border-light;
   border-bottom: $green-border-dark;
   border-right: $green-border-dark;
-}
 
-.greenbtn:hover {
-  border-top: $green-border-light-active;
-  border-left: $green-border-light-active;
-  border-bottom: $green-border-dark;
-  border-right: $green-border-dark;
-}
-
-.greenbtn:active {
-  background-color: $green-button-color-active;
+  &:hover {
+    border-top: $green-border-light-active;
+    border-left: $green-border-light-active;
+    border-bottom: $green-border-dark;
+    border-right: $green-border-dark;
+  }
+  &:active {
+    background-color: $green-button-color-active;
+  }
 }
 
 .signoutbtn {
   cursor: pointer;
-  margin-left: 10px;
-  padding-left: 12px;
-  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 40px;
-}
-
-.textLeft {
-  text-align: end;
 }
 
 .logoutLogo {
   filter: invert(83%) sepia(39%) saturate(78%) hue-rotate(43deg) brightness(110%) contrast(106%);
   height: 25px;
-  position: relative;
-  top: 5px;
 }
 
-@media screen and (max-width: $bp-lg) {
+@media (max-width: $bp-lg) {
   .headerText {
-    font-size: 20px;
-    margin-bottom: 100px;
+    font-size: 24px;
   }
-
-  .signoutbtn {
-    width: 75%;
-    padding: 0;
-    font-size: 16px;
-  }
-
+  .authLink,
+  .signoutbtn,
   .greenbtn {
-    width: 75%;
-    margin-bottom: 5px;
-    padding: 0;
-    font-size: 16px;
+    padding: 8px;
+    height: auto;
+    font-size: 20px;
   }
 
   .logoutLogo {
     height: 20px;
-    top: 5px;
   }
 }
 
-@media screen and (max-width: $bp-md) {
-  .header {
-    flex-direction: column;
+@media (max-width: $bp-sm) {
+  .headerText {
+    font-size: 20px;
   }
-
-  .fixedHeader {
-    flex-direction: column;
-  }
-
-  .buttons {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .signoutbtn {
-    flex: 1;
-  }
-
+  .authLink,
+  .signoutbtn,
   .greenbtn {
-    flex: 1;
-    margin-bottom: 5px;
+    padding: 4px 6px;
+    height: auto;
+    font-size: 16px;
+  }
+
+  .logoutLogo {
+    height: 16px;
+  }
+}
+
+@media (max-width: $bp-xs) {
+  .headerText {
+    font-size: 18px;
+  }
+  .authLink,
+  .greenbtn {
+    padding: 4px;
+    height: auto;
+    font-size: 14px;
+  }
+  .signoutbtn {
+    font-size: 0;
+  }
+
+  .logoutLogo {
+    height: 16px;
   }
 }
