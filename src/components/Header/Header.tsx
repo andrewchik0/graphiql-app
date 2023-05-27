@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import { useAppDispatch } from '../../hooks/redux';
 import { userSlice } from '../../store/slices/userSlice';
 import styles from './Header.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,6 +15,11 @@ export default function Header() {
   const ref = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const isPlaygroundPage = location.pathname === '/playground';
+  const { t, i18n } = useTranslation('header');
+
+  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(e.target.value);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -39,7 +45,7 @@ export default function Header() {
                   className={cn(styles.authLink, styles.greenbtn)}
                   onClick={() => navigate('/playground')}
                 >
-                  Playground
+                  {t('playground')}
                 </button>
               )}
               <button
@@ -47,19 +53,27 @@ export default function Header() {
                 onClick={() => dispatch(userSlice.actions.removeAndLogOutUser())}
               >
                 <img src="./logout.svg" className={styles.logoutLogo} />
-                &nbsp;Sign Out
+                &nbsp;{t('signout')}
               </button>
             </>
           ) : (
             <>
               <button className={styles.authLink} onClick={() => navigate('/signin')}>
-                Sign In
+                {t('signin')}
               </button>
               <button className={styles.authLink} onClick={() => navigate('/signup')}>
-                Sign Up
+                {t('signup')}
               </button>
             </>
           )}
+          <select
+            className={styles.language}
+            onChange={changeLanguage}
+            defaultValue={i18n.language}
+          >
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+          </select>
         </div>
       </div>
     </>

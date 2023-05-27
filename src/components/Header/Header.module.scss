@@ -79,6 +79,27 @@
   height: 25px;
 }
 
+.language {
+  height: 40px;
+  padding: 0 6px;
+  background-color: $button-color;
+  color: $font-color;
+  font-size: 18px;
+  border-bottom: $border-dark;
+  border-right: $border-dark;
+  border-top: $border-light;
+  border-left: $border-light;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  &:hover {
+    border-bottom: $border-focus-dark;
+    border-right: $border-focus-dark;
+    border-top: $border-focus-light;
+    border-left: $border-focus-light;
+  }
+}
+
 @media (max-width: $bp-lg) {
   .headerText {
     font-size: 24px;
@@ -90,13 +111,18 @@
     height: auto;
     font-size: 20px;
   }
-
+  .language {
+    height: auto;
+  }
   .logoutLogo {
     height: 20px;
   }
 }
 
 @media (max-width: $bp-sm) {
+  .header {
+    padding: 8px 10px;
+  }
   .headerText {
     font-size: 20px;
   }
@@ -107,7 +133,10 @@
     height: auto;
     font-size: 16px;
   }
-
+  .language {
+    padding: 0 2px;
+    font-size: 16px;
+  }
   .logoutLogo {
     height: 16px;
   }
@@ -115,13 +144,19 @@
 
 @media (max-width: $bp-xs) {
   .headerText {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  .buttons {
+    gap: 6px;
   }
   .authLink,
   .greenbtn {
     padding: 4px;
     height: auto;
     font-size: 14px;
+  }
+  .language {
+    font-size: 12px;
   }
   .signoutbtn {
     font-size: 0;

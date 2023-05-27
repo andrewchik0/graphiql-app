@@ -89,6 +89,7 @@
     grid-template-rows: auto auto;
     grid-template-areas: 'authors authors' 'logo year';
     gap: 10px;
+    padding: 10px;
   }
   .authors {
     width: 100%;
