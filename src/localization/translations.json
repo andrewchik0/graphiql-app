@@ -1,0 +1,118 @@
+{
+  "en": {
+    "header": {
+      "signin": "Sign In",
+      "signup": "Sign Up",
+      "signout": "Sign Out",
+      "playground": "Playground"
+    },
+    "authform": {
+      "signin": "Sign In",
+      "signup": "Sign Up",
+      "form": {
+        "placeholder": {
+          "email": "E-mail",
+          "password": "Password",
+          "confirmPassword": "Confirm Password"
+        }
+      },
+      "errors": {
+        "enterEmail": "Enter an e-mail",
+        "enterValidEmail": "Enter a valid e-mail",
+        "enterPassword": "Enter a password",
+        "passwordLength": "Password must be at least 8 symbols",
+        "password1Letter": "Pasword must contain at least 1 letter",
+        "password1Digit": "Password must contain at least 1 digit",
+        "password1Special": "Password must contain at least 1 special character",
+        "passwordSame": "Passwords must be the same"
+      },
+      "noAccount": "Don\u0027t have the account?",
+      "createAccount": "Create an account",
+      "haveAccount": "Already have an account?",
+      "signinVerb": "Sign in",
+      "button": {
+        "signin": "Sign In",
+        "signup": "Sign Up"
+      }
+    },
+    "playground": {
+      "label": {
+        "query": "Query",
+        "variables": "Variables",
+        "headers": "Headers",
+        "response": "Response",
+        "executeQuery": "Execute query",
+        "showDocs": "Show documentation explorer"
+      }
+    },
+    "documentation": {
+      "documentation": "Documentation"
+    },
+    "notFound": {
+      "title": "404. Not found."
+    },
+    "welcomePage": {
+      "teamDesc": "We are a team of student developers at the",
+      "rsDesc": "<0>RS School</0> is a free-of-charge and community-based <1>education program</1> conducted by The Rolling Scopes developer community since 2013.",
+      "appTitle": "We present our"
+    }
+  },
+  "ru": {
+    "header": {
+      "signin": "Вход",
+      "signup": "Регистрация",
+      "signout": "Выход",
+      "playground": "Тестовая среда"
+    },
+    "authform": {
+      "signin": "Вход",
+      "signup": "Регистрация",
+      "form": {
+        "placeholder": {
+          "email": "Электронная почта",
+          "password": "Пароль",
+          "confirmPassword": "Подтвердите пароль"
+        }
+      },
+      "errors": {
+        "enterEmail": "Введите электронную почту",
+        "enterValidEmail": "Введите правильный адрес электронной почты",
+        "enterPassword": "Введите пароль",
+        "passwordLength": "Пароль должен состоять как минимум из 8 символов",
+        "password1Letter": "Пароль должен содержать как минимум 1 букву",
+        "password1Digit": "Пароль должен содержать как минимум 1 цифру ",
+        "password1Special": "Пароль должен содержать как минимум 1 специальный символ",
+        "passwordSame": "Пароли должны совпадать"
+      },
+      "noAccount": "Нет аккаунта?",
+      "createAccount": "Создать аккаунт",
+      "haveAccount": "Уже есть аккаунт?",
+      "signinVerb": "Войти",
+      "button": {
+        "signin": "Войти",
+        "signup": "Зарегистрироваться"
+      }
+    },
+    "playground": {
+      "label": {
+        "query": "Запрос",
+        "variables": "Переменные",
+        "headers": "Заголовки",
+        "response": "Ответ",
+        "executeQuery": "Выполнить запрос",
+        "showDocs": "Показать документацию"
+      }
+    },
+    "documentation": {
+      "documentation": "Документация"
+    },
+    "notFound": {
+      "title": "404. Страница не найдена."
+    },
+    "welcomePage": {
+      "teamDesc": "Мы команда студентов-разработчиков в",
+      "rsDesc": "<0>RS School</0> это бесплатная и коллективная <1>образовательная программа</1>, проводимая сообществом разработчиков The Rolling Scopes с 2013 года.",
+      "appTitle": "Мы представляем наш"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import styles from './AuthForm.module.scss';
 import { useForm, FieldValues } from 'react-hook-form';
@@ -29,6 +30,8 @@ export default function SignUpPage({
     formState: { errors },
   } = useForm();
 
+  const { t } = useTranslation('authform');
+
   const onSubmit = (data: FieldValues) => {
     handleLogin(data.email, data.password);
   };
@@ -46,17 +49,17 @@ export default function SignUpPage({
   return (
     <div className={styles.form}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>{authType == AuthType.login ? 'Sign In' : 'Sign Up'}</h2>
+        <h2>{authType == AuthType.login ? t('signin') : t('signup')}</h2>
         <div>
           <input
             type="text"
-            placeholder="E-mail"
+            placeholder={t('form.placeholder.email')}
             className={styles.emailInput}
             {...register('email', {
-              required: 'Enter an e-mail',
+              required: t('errors.enterEmail'),
               pattern: {
                 value: /\S+@\S+\.\S+/,
-                message: 'Enter a valid e-mail',
+                message: t('errors.enterValidEmail'),
               },
             })}
           />
@@ -64,23 +67,19 @@ export default function SignUpPage({
         <div>
           <input
             type="password"
-            placeholder="Password"
+            placeholder={t('form.placeholder.password')}
             className={styles.passwordInput}
             {...register('password', {
-              required: 'Enter a password',
+              required: t('errors.enterPassword'),
               validate:
                 authType === AuthType.register
                   ? {
-                      is8Symbols: (pas) =>
-                        /.{8,}/.test(pas) || 'Password must be at least 8 symbols',
+                      is8Symbols: (pas) => /.{8,}/.test(pas) || t('errors.passwordLength'),
                       is1Letter: (pas) =>
-                        /(?=.*?[A-Z])|(?=.*?[a-z])/.test(pas) ||
-                        'Pasword must contain at least 1 letter',
-                      is1Digit: (pas) =>
-                        /(?=.*?[0-9])/.test(pas) || 'Password must contain at least 1 digit',
+                        /(?=.*?[A-Z])|(?=.*?[a-z])/.test(pas) || t('errors.password1Letter'),
+                      is1Digit: (pas) => /(?=.*?[0-9])/.test(pas) || t('errors.password1Digit'),
                       is1SpecialCharacter: (pas) =>
-                        /(?=.*?[#?!@$%^&*-])/.test(pas) ||
-                        'Password must contain at least 1 special chatacter',
+                        /(?=.*?[#?!@$%^&*-])/.test(pas) || t('errors.password1Special'),
                     }
                   : {},
             })}
@@ -90,11 +89,11 @@ export default function SignUpPage({
           <div>
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder={t('form.placeholder.confirmPassword')}
               className={styles.passwordInput}
               {...register('confirmPassword', {
                 validate: {
-                  isEqual: (pas) => pas === watch('password') || 'Passwords must be the same',
+                  isEqual: (pas) => pas === watch('password') || t('errors.passwordSame'),
                 },
               })}
             />
@@ -104,11 +103,11 @@ export default function SignUpPage({
         <div className={styles.accountLink}>
           {authType == AuthType.login ? (
             <>
-              Don&apos;t have the account?&nbsp;<Link to="/signup">Create an account</Link>
+              {t('noAccount')}&nbsp;<Link to="/signup">{t('createAccount')}</Link>
             </>
           ) : (
             <>
-              Already have an account?&nbsp;<Link to="/signin">Sign in</Link>
+              {t('haveAccount')}&nbsp;<Link to="/signin">{t('signinVerb')}</Link>
             </>
           )}
         </div>
@@ -116,9 +115,9 @@ export default function SignUpPage({
           {isLoading ? (
             <Roller scale={0.5} x={-10} y={-7} />
           ) : authType == AuthType.login ? (
-            'Sign In'
+            t('button.signin')
           ) : (
-            'Sign Up'
+            t('button.signup')
           )}
         </button>
       </form>

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import styles from './WelcomePage.module.scss';
+import { Trans, useTranslation } from 'react-i18next';
 
 function WelcomePage() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [sectionRatios, setSectionRatios] = useState<number[]>([]);
   const [isAnimate, setIsAnimate] = useState(window.innerWidth > 1200);
+  const { t } = useTranslation('welcomePage');
   const sectionHeights = [
     window.innerHeight,
     window.innerHeight * 3.5,
@@ -77,7 +79,7 @@ function WelcomePage() {
       <div className={styles.welcome}>
         <div className={`${styles.team}`} style={{ height: sectionHeights[0] + 'px' }}>
           <div className={styles.teamDesc}>
-            We are a team of student developers at the{' '}
+            {t('teamDesc')}{' '}
             <a href="https://rs.school/index.html" target="_blank" rel="noreferrer">
               <img src="./external-link.svg" className={styles.logo} />
               RS School.
@@ -106,9 +108,10 @@ function WelcomePage() {
               className={`${styles.col5} ${styles.rsdesc}`}
               style={{ transform: getRsDescTransform() }}
             >
-              <span className={styles.coloredSpan}>RS School</span> is a free-of-charge and
-              community-based <span className={styles.coloredSpan}>education program</span>{' '}
-              conducted by The Rolling Scopes developer community since 2013.
+              <Trans i18nKey="rsDesc" t={t}>
+                <span className={styles.coloredSpan}></span>
+                <span className={styles.coloredSpan}></span>
+              </Trans>
             </div>
           </div>
         </div>
@@ -119,7 +122,7 @@ function WelcomePage() {
           }}
         >
           <div className={`${styles.sticky} ${styles.present} ${styles.footerOnWelcomePage}`}>
-            We present our <span className={styles.coloredSpan}>GraphiQL App</span>.
+            {t('appTitle')} <span className={styles.coloredSpan}>GraphiQL App</span>.
             <div className={styles.images}>
               <div className={styles.appScreenshot} />
               <div className={styles.responseImage} />

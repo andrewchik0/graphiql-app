@@ -11,8 +11,10 @@ import iconUnfold from '../../assets/images/icon-unfold.svg';
 import iconPlayArrow from '../../assets/images/icon-play-arrow.svg';
 import iconDocumentation from '../../assets/images/icon-documentation.svg';
 import styles from './PlaygroundPage.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const PlaygroundPage = () => {
+  const { t } = useTranslation('playground');
   const [trigger, { data, error, isError, isFetching, isLoading }] = useLazyFetchResultQuery();
   const [docIsOpen, setDocIsOpen] = useState(false);
   const [toolsIsOpen, setToolsIsOpen] = useState(true);
@@ -105,18 +107,18 @@ const PlaygroundPage = () => {
       </div>
 
       <section className={cn(styles.request, { [styles.requestVarsOpened]: toolsIsOpen })}>
-        <label className={styles.label}>Query</label>
+        <label className={styles.label}>{t('label.query')}</label>
 
         <div className={styles.requestQuery}>
           <Editor value={queryValueRef.current} type="graphql" handleChange={updateQueryValue} />
           <div className={styles.controls}>
             <button className={styles.button} onClick={handleRun}>
               <img className={styles.buttonIcon} src={iconPlayArrow} />
-              <span className={styles.tooltip}>Execute query</span>
+              <span className={styles.tooltip}>{t('label.executeQuery')}</span>
             </button>
             <button className={styles.button} onClick={toggleDocumentation}>
               <img className={styles.buttonIcon} src={iconDocumentation} />
-              <span className={styles.tooltip}>Show documentation explorer</span>
+              <span className={styles.tooltip}>{t('label.showDocs')}</span>
             </button>
           </div>
         </div>
@@ -128,7 +130,7 @@ const PlaygroundPage = () => {
             })}
             onClick={() => handleLabelClick('variables')}
           >
-            Variables
+            {t('label.variables')}
           </label>
 
           <label
@@ -137,7 +139,7 @@ const PlaygroundPage = () => {
             })}
             onClick={() => handleLabelClick('headers')}
           >
-            Headers
+            {t('label.headers')}
           </label>
           <button className={styles.toolsToggleButton} onClick={toggleTools}>
             <img
@@ -162,7 +164,7 @@ const PlaygroundPage = () => {
       </section>
 
       <section className={styles.response}>
-        <label className={styles.label}>Response</label>
+        <label className={styles.label}>{t('label.response')}</label>
         <div className={styles.responseOutput}>
           {isFetching ? (
             <Roller scale={1} x={0} y={0} style={{ margin: 'auto' }} />
