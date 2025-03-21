@@ -1,0 +1,219 @@
+@import '../../utils/variables';
+@import '../../utils/breakpoints';
+
+.playground-page {
+  padding: 10px;
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 0;
+  overflow-y: auto;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+  overflow-x: hidden;
+  @media (max-width: $bp-lg) {
+    flex-direction: column;
+  }
+}
+.label {
+  margin-left: 8px;
+
+  &-tool {
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover,
+    &-active {
+      opacity: 1;
+    }
+  }
+}
+
+.request {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  overflow: auto;
+  &-query {
+    flex-grow: 3;
+    flex-basis: 0;
+    overflow-y: auto;
+    background-color: $input-color;
+    border: $border-dark;
+    color: $font-color;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  &-variables {
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
+    background-color: $input-color;
+    border: $border-dark;
+    color: $font-color;
+  }
+  @media (max-width: $bp-xl) {
+    &-query {
+      font-size: 16px;
+    }
+    &-variables {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: $bp-lg) {
+    flex: 1;
+    &-vars-opened {
+      flex: 2;
+    }
+    &-query {
+      flex-grow: 1;
+      font-size: 16px;
+    }
+    &-variables {
+      flex-grow: 1;
+    }
+  }
+}
+.button {
+  height: 36px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 8px;
+  width: 40px;
+
+  &-icon {
+    width: 24px;
+  }
+  & .tooltip {
+    position: absolute;
+    background-color: $button-color;
+    color: $font-color;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 88px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    display: block;
+    z-index: 10;
+  }
+  &:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  @media (max-width: $bp-xl) {
+    &:hover .tooltip {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+  @media (max-width: $bp-md) {
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    &-icon {
+      width: 18px;
+    }
+  }
+}
+.response {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  overflow: auto;
+  &-output {
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
+    background-color: $input-color;
+    border: $border-dark;
+    color: $font-color;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-preloader {
+    width: 80px;
+    height: 80px;
+  }
+  @media (max-width: $bp-xl) {
+    &-output {
+      font-size: 16px;
+    }
+  }
+}
+
+.error-text {
+  font-size: 20px;
+  padding: 20px;
+  color: rgb(245, 140, 114);
+}
+
+.documentation-wrapper {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  width: min-content;
+  min-width: 540px;
+  margin: -10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  transform: translateX(100%);
+  &-show {
+    transform: translateX(0);
+  }
+  @media screen and (max-width: $bp-sm) {
+    font-size: 16px;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.tools {
+  &-labels {
+    display: flex;
+    gap: 10px;
+  }
+  &-toggle-button {
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    display: flex;
+    margin-left: auto;
+    border: none;
+    background: none;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      border: none;
+      background-color: rgb(58, 58, 53);
+      cursor: pointer;
+    }
+  }
+}
+
+.fold-icon {
+  width: 24px;
+  &-opened {
+    transform: scaleY(-1);
+  }
+  @media (max-width: $bp-lg) {
+    transform: scaleY(1) rotate(0deg);
+    &-opened {
+      transform: scaleY(1) rotate(90deg);
+    }
+  }
+}
+
+.vars-closed {
+  flex-grow: 0;
+}

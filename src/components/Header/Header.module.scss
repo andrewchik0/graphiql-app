@@ -1,0 +1,168 @@
+@import '../../utils/variables';
+@import '../../utils/breakpoints';
+
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 8px 15px;
+  border-bottom: $border-light;
+  background-color: $input-color;
+  transition: opacity 0.3s;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  &-fixed {
+    border-color: rgb(30, 30, 30);
+    background-color: rgb(30, 30, 30);
+    opacity: 0.95;
+  }
+}
+
+.invisibleIntersect {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.headerText {
+  text-decoration: none;
+  color: $font-color;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.authLink {
+  cursor: pointer;
+  height: 40px;
+}
+
+.greenbtn {
+  background-color: $green-button-color;
+  border-top: $green-border-light;
+  border-left: $green-border-light;
+  border-bottom: $green-border-dark;
+  border-right: $green-border-dark;
+
+  &:hover {
+    border-top: $green-border-light-active;
+    border-left: $green-border-light-active;
+    border-bottom: $green-border-dark;
+    border-right: $green-border-dark;
+  }
+  &:active {
+    background-color: $green-button-color-active;
+  }
+}
+
+.signoutbtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.logoutLogo {
+  filter: invert(83%) sepia(39%) saturate(78%) hue-rotate(43deg) brightness(110%) contrast(106%);
+  height: 25px;
+}
+
+.language {
+  height: 40px;
+  padding: 0 6px;
+  background-color: $button-color;
+  color: $font-color;
+  font-size: 18px;
+  border-bottom: $border-dark;
+  border-right: $border-dark;
+  border-top: $border-light;
+  border-left: $border-light;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  &:hover {
+    border-bottom: $border-focus-dark;
+    border-right: $border-focus-dark;
+    border-top: $border-focus-light;
+    border-left: $border-focus-light;
+  }
+}
+
+@media (max-width: $bp-lg) {
+  .headerText {
+    font-size: 24px;
+  }
+  .authLink,
+  .signoutbtn,
+  .greenbtn {
+    padding: 8px;
+    height: auto;
+    font-size: 20px;
+  }
+  .language {
+    height: auto;
+  }
+  .logoutLogo {
+    height: 20px;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .header {
+    padding: 8px 10px;
+  }
+  .headerText {
+    font-size: 20px;
+  }
+  .authLink,
+  .signoutbtn,
+  .greenbtn {
+    padding: 4px 6px;
+    height: auto;
+    font-size: 16px;
+  }
+  .language {
+    padding: 0 2px;
+    font-size: 16px;
+  }
+  .logoutLogo {
+    height: 16px;
+  }
+}
+
+@media (max-width: $bp-xs) {
+  .headerText {
+    font-size: 16px;
+  }
+  .buttons {
+    gap: 6px;
+  }
+  .authLink,
+  .greenbtn {
+    padding: 4px;
+    height: auto;
+    font-size: 14px;
+  }
+  .language {
+    font-size: 12px;
+  }
+  .signoutbtn {
+    font-size: 0;
+  }
+
+  .logoutLogo {
+    height: 16px;
+  }
+}

@@ -1,0 +1,105 @@
+@import '../../utils/variables';
+@import '../../utils/breakpoints';
+
+.footer {
+  border-top: $border-dark;
+  background-color: rgb(29, 29, 27);
+  padding: 10px 15px;
+  display: grid;
+  align-items: center;
+  margin-top: auto;
+  justify-content: space-between;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: 'logo authors year';
+}
+
+.authors {
+  display: flex;
+  gap: 10px;
+  justify-self: center;
+  grid-area: authors;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  background-color: rgb(48, 48, 45);
+  text-decoration: none;
+  color: $font-color;
+
+  &:hover {
+    background-color: rgb(66, 66, 63);
+    transition: 0.3s;
+  }
+}
+
+.avatar {
+  height: 40px;
+  border-radius: 100px;
+}
+
+.year {
+  margin: 0 0 0 55px;
+  grid-area: year;
+}
+
+.rs-logo {
+  height: 40px;
+  grid-area: logo;
+}
+
+@media screen and (max-width: $bp-xl) {
+  .author {
+    padding: 8px 8px;
+  }
+  .avatar {
+    height: 28px;
+  }
+  .rs-logo {
+    height: 30px;
+  }
+  .year {
+    font-size: 20px;
+    margin: 0 0 0 35px;
+  }
+}
+
+@media screen and (max-width: $bp-lg) {
+  .author {
+    font-size: 15px;
+  }
+  .avatar {
+    display: none;
+  }
+  .rs-logo {
+    height: 26px;
+  }
+  .year {
+    font-size: 18px;
+    margin: 0 0 0 24px;
+  }
+}
+
+@media screen and (max-width: $bp-sm) {
+  .footer {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: 'authors authors' 'logo year';
+    gap: 10px;
+    padding: 10px;
+  }
+  .authors {
+    width: 100%;
+  }
+  .author {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .year {
+    justify-self: end;
+  }
+}

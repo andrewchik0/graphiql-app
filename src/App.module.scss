@@ -1,0 +1,82 @@
+@import './utils/variables';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $background-color;
+  color: $font-color;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+}
+
+input {
+  height: 50px;
+  padding-left: 10px;
+  width: 400px;
+  background-color: $input-color;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: $font-color;
+  border-top: $border-dark;
+  border-left: $border-dark;
+  border-bottom: $border-light;
+  border-right: $border-light;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-top: $border-focus-dark;
+  border-left: $border-focus-dark;
+  border-bottom: $border-focus-light;
+  border-right: $border-focus-light;
+  -webkit-text-fill-color: $font-color;
+  -webkit-box-shadow: 0 0 0px 1000px $button-active-color inset;
+}
+
+input:focus {
+  outline: none;
+  border-top: $border-focus-dark;
+  border-left: $border-focus-dark;
+  border-bottom: $border-focus-light;
+  border-right: $border-focus-light;
+}
+
+a {
+  color: $link-color;
+}
+
+button {
+  background-color: $button-color;
+  color: $font-color;
+  font-size: 20px;
+  height: 50px;
+  padding: 0 20px;
+  border-bottom: $border-dark;
+  border-right: $border-dark;
+  border-top: $border-light;
+  border-left: $border-light;
+}
+
+button:hover {
+  border-bottom: $border-focus-dark;
+  border-right: $border-focus-dark;
+  border-top: $border-focus-light;
+  border-left: $border-focus-light;
+}
+
+button:active {
+  background-color: $button-active-color;
+  transition: background-color 0.15s;
+}

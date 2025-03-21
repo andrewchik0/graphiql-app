@@ -1,0 +1,47 @@
+@import '../../utils/breakpoints';
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
+
+.authHeader {
+  margin-top: -15%;
+}
+
+.accountLink {
+  text-align: left;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.submit {
+  cursor: pointer;
+}
+
+.emailInput {
+  margin-bottom: 20px;
+}
+
+.validationError {
+  text-align: left;
+  padding-left: 10px;
+  word-wrap: break-word;
+  width: 300px;
+  margin-bottom: 5px;
+  color: rgb(245, 140, 114);
+}
+
+@media screen and (max-width: $bp-md) {
+  .emailInput {
+    width: 90vw;
+  }
+
+  .passwordInput {
+    width: 90vw;
+  }
+}
